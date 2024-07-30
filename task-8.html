@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAN Card Validator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .message {
+            margin-top: 10px;
+            font-weight: bold;
+            color: red;
+        }
+
+        .valid {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form id="pan-form">
+            <label for="pan">PAN Card:</label>
+            <input type="text" id="pan" name="pan" maxlength="10" required>
+            <button type="submit">Submit</button>
+            <div id="message" class="message"></div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('pan-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const panInput = document.getElementById('pan').value;
+            const messageDiv = document.getElementById('message');
+            const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]$/;
+
+            if (panRegex.test(panInput)) {
+                messageDiv.textContent = 'Valid PAN Number';
+                messageDiv.className = 'message valid';
+            } else {
+                messageDiv.textContent = 'Invalid PAN Number';
+                messageDiv.className = 'message';
+            }
+        });
+    </script>
+</body>
+</html>
